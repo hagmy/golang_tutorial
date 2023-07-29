@@ -18,6 +18,25 @@ func Hello(name string) (string, error) {
 	return message, nil
 }
 
+// Hellos returns a map that associates each of the named people
+// with a greeting message.
+func Hellos(names []string) (map[string]string, error) {
+	// A map to associate name with messages.
+	// initializing a map with the following syntax: make(map[key-type]value-type)
+	messages := make(map[string]string)
+
+	// Loop through the received slice of names, calling
+	// the Hello function to get a message for each name.
+	for _, name := range names {
+		message, err := Hello(name)
+		if err != nil {
+			return nil, err
+		}
+		messages[name] = message
+	}
+	return messages, nil
+}
+
 // randomFormat starts with a lowercase letter, making it accessible only to code
 // in its own package (in other words, it's not exported).
 func randomFormat() string {
